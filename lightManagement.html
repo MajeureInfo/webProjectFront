@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Lights</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+  integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="masthead">
+      <h3 class="text-muted">Smart building project</h3>
+      <nav class="navbar navbar-expand-md navbar-light bg-light rounded mb-3">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav text-md-center nav-justified w-100">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Rooms</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="">Light Management<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Title -->
+    <div class="jumbotron">
+      <h1>Light Management</h1>
+      <p class="lead">Here you can turn off the lights that are on.</p>
+    </div>
+
+    <!-- Formular to turn off the lights -->
+    <div id="dropdown">
+      <form class="form-inline">
+        <label class="mr-sm-4" for="inlineFormCustomSelect">Room number</label>
+        <select class="custom-select mb-2 mr-sm-4 mb-sm-0" id="inlineFormSelect">
+          <option selected>Choose...</option>
+          <option v-for="r in rooms" :value="r.id">{{r.id}}</option>
+        </select>
+        <button type="submit" id="submit" class="btn btn-info">Turn off</button>
+        <span class="alert alert-success" role="alert"></span>
+      </form>
+      <div class="alert alert-secondary" role="alert">
+        All the lights are off !
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/roomVue.js"></script>
+  <script src="js/lights.js"></script>
+</body>
+</html>
