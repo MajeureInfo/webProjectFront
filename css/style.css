@@ -13,7 +13,7 @@ body {
   border-top: 1px solid #eee;
 }
 
-/* Main message and */
+/* Main title */
 .jumbotron {
   text-align: center;
   background-color: transparent;
@@ -51,6 +51,7 @@ body {
   }
 }
 
+/* Alerts */
 .alert-success {
   display: none;
   margin-top: auto;
@@ -65,4 +66,18 @@ body {
   margin-bottom: 20px;
   margin-left: 0px;
   width: 35%;
+}
+
+/* Building filter */
+#buildingFilter {
+  margin: 20px;
+}
+
+#inlineBuildingSelector {
+  width: 70px;
+}
+
+/* Table */
+.roomLine {
+  display: none;
 }
