@@ -80,3 +80,7 @@ body {
 .roomLine {
   display: none;
 }
+
+.buildingLine {
+  display: none;
+}
