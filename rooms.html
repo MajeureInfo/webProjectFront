@@ -28,6 +28,9 @@
             <li class="nav-item">
               <a class="nav-link" href="lightManagement.html">Light Management</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="noiseManagement.html">Noise Management</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -66,8 +69,8 @@
       <table class = "table">
         <thead>
           <tr>
-            <th>N° building</th>
             <th>N° room</th>
+            <th>N° building</th>
             <th>Light Status</th>
             <th>Light Level</th>
             <th>Ringer Status</th>
@@ -78,8 +81,8 @@
         </thead>
         <tbody>
           <tr class="roomLine" v-for="room in rooms">
-            <th class="buildingId">{{ room.buildingId }}</th>
             <th class="roomId">{{ room.id }}</th>
+            <th class="buildingId">{{ room.buildingId }}</th>
             <td><div v-if="room.light.status == 'ON'"><img src="img/light-on.png"></div>
               <div v-else-if="room.light.status == 'OFF'"><img src="img/light-off.png"></div>
             </td>

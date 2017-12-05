@@ -24,11 +24,11 @@
             <li class="nav-item">
               <a class="nav-link" href="rooms.html">Rooms</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="">Light Management<span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
-              <a class="nav-link" href="noiseManagement.html">Noise Management</a>
+              <a class="nav-link" href="lightManagement.html">Light Management</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="">Noise Management<span class="sr-only">(current)</span></a>
             </li>
           </ul>
         </div>
@@ -37,21 +37,21 @@
 
     <!-- Title -->
     <div class="jumbotron">
-      <h1 class="light">Light Management</h1>
-      <p class="lead">Here you can switch the state of the lights.</p>
+      <h1 class="ringer">Noise Management</h1>
+      <p class="lead">Here you can switch the states of the ringers.</p>
     </div>
 
-    <!-- Switch the light of a room -->
-    <h3>Switch the light of a room</h3>
+    <!-- Switch the ringer of a room -->
+    <h3>Switch the ringer of a room</h3>
     <!-- Formular -->
     <div class="paragraph" id="switchOneRoom">
       <form class="form-inline" id="singleRoomForm">
-        <label class="mr-sm-4" for="inlineFormCustomSelect">Choose rooms with light</label>
+        <label class="mr-sm-4" for="inlineFormCustomSelect">Choose rooms with ringer</label>
         <select class="custom-select mb-2 mr-sm-4 mb-sm-0" id="roomStateSelector">
           <option selected>ON</option>
           <option>OFF</option>
         </select>
-        <label class="mr-sm-4" for="inlineFormCustomSelect">Pick the number of the room with light '<span id='roomStatus'>ON</span>' you want to switch the light: </label>
+        <label class="mr-sm-4" for="inlineFormCustomSelect">Pick the number of the room with ringer '<span id='roomStatus'>ON</span>' you want to switch the ringer: </label>
         <select class="custom-select mb-2 mr-sm-4 mb-sm-0" id="roomNumberSelector">
           <option v-for="r in rooms" :value="r.id">{{r.id}}</option>
         </select>
@@ -59,27 +59,27 @@
       </form>
       <br>
       <div>
-        <span class="alert alert-secondary alert-oneRoom-fail" role="alert">All the lights are off !</span>
+        <span class="alert alert-secondary alert-oneRoom-fail" role="alert">All the ringers are off !</span>
         <span class="alert alert-success alert-oneRoom-success" role="alert"></span>
       </div>
     </div>
 
-    <!-- Switch all the lights -->
-    <h3>Switch all the lights (of all the rooms of all the buildings)</h3>
+    <!-- Switch all the ringers -->
+    <h3>Switch all the ringers (of all the rooms of all the buildings)</h3>
     <!-- Formular -->
     <div class="paragraph" id="switchAllRooms">
       <form class="form-inline" id="allRoomsForm">
-        <label class="mr-sm-4" for="inlineFormCustomSelect">Choose rooms with light</label>
+        <label class="mr-sm-4" for="inlineFormCustomSelect">Choose rooms with ringer</label>
         <select class="custom-select mb-2 mr-sm-4 mb-sm-0" id="globalStateSelector">
           <option selected>ON</option>
           <option>OFF</option>
         </select>
-        <label class="mr-sm-4" for="inlineFormCustomSelect">Switch '<span id='inverseGlobalStatus'>OFF</span>' ALL the rooms with light '<span id='globalStatus'>ON</span>':</label>
+        <label class="mr-sm-4" for="inlineFormCustomSelect">Switch '<span id='inverseGlobalStatus'>OFF</span>' ALL the rooms with ringer '<span id='globalStatus'>ON</span>':</label>
         <button type="submit" id="submitAllRooms" class="btn btn-info">Switch !</button>
       </form>
       <br>
       <div>
-          <span class="alert alert-success alert-allRooms-success" role="alert">All the lights are off !</span>
+        <span class="alert alert-success alert-allRooms-success" role="alert"></span>
       </div>
     </div>
 
