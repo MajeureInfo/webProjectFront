@@ -1,5 +1,5 @@
-// const url_api = "https://pure-island-76277.herokuapp.com/api"
-const url_api = "http://localhost:8080/api"
+const url_api = "https://pure-island-76277.herokuapp.com/api"
+//const url_api = "http://localhost:8080/api"
 
 // create the vue for the dropdown menu in the formular.
 var dropdownVue = createRoomsVue("dropdown", url_api + "/rooms");
