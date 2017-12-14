@@ -1,5 +1,5 @@
-// const url_api = "https://pure-island-76277.herokuapp.com/api"
-const url_api = "http://localhost:8080/api"
+const url_api = "https://pure-island-76277.herokuapp.com/api"
+//const url_api = "http://localhost:8080/api"
 
 const objectType = $('h1').attr('class');
 
