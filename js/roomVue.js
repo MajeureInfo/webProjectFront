@@ -16,7 +16,12 @@ function createRoomsVue(id, url_api) {
 
         axios.post(url_api +'/rooms/'+ room.id + "/switch-light")
         .then(function(response) {
-          roomVue.rooms = response.data;
+          if ($("#inlineBuildingSelector").attr('disabled') == "disabled") {
+            fillTable("All");
+          }
+          else {
+            fillTable(document.getElementById("inlineBuildingSelector").value);
+          }
         })
       },
       switchRinger(room) {
@@ -26,7 +31,12 @@ function createRoomsVue(id, url_api) {
 
         axios.post(url_api +'/rooms/'+ room.id + "/switch-ringer")
         .then(function(response) {
-          roomVue.rooms = response.data;
+          if ($("#inlineBuildingSelector").attr('disabled') == "disabled") {
+            fillTable("All");
+          }
+          else {
+            fillTable(document.getElementById("inlineBuildingSelector").value);
+          }
         })
       }
     }
