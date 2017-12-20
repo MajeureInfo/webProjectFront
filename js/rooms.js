@@ -8,8 +8,9 @@ function fillTableWithAllRooms() {
     roomsVue.rooms = response.data;
   })
   .then(function() {
+    $(".loading").hide();
     $(".roomLine").each(function(index) {
-        $(this).delay(100*index).fadeIn();
+      $(this).delay(100*index).fadeIn();
     });
   });
 }
@@ -21,8 +22,9 @@ function fillTableWithFilter(buildingId) {
     roomsVue.rooms = response.data.rooms;
   })
   .then(function() {
+    $(".loading").hide();
     $(".roomLine").each(function(index) {
-        $(this).delay(100*index).fadeIn();
+      $(this).delay(100*index).fadeIn();
     });
   });
 }
@@ -36,7 +38,7 @@ function fillTable(value) {
   }
 }
 
-// create the Building Vue for the dropdown menu...
+// create the Building Vue for the dropdown menu
 var buildingVue = new Vue({
   el: "#buildingFilter",
   data: {
@@ -44,22 +46,40 @@ var buildingVue = new Vue({
   }
 });
 
-// ... and fill the menu with the buildings id
+// create the room vue for the table.
+var roomsVue = createRoomsVue("roomsVue", url_api);
+
+// fill the dropdown menu and the room table 
 $(function () {
   axios.get(url_api + "/buildings")
   .then(function(response) {
     buildingVue.buildings = response.data;
+    setTimeout(function (){
+      params = window.location.href.split("?")[1]
+      if (params != undefined){
+        params = params.split("=");
+        param = params[0];
+        value = parseInt(params[1]);
+      }
+      else {
+        param="noParam";
+        value="All";
+      }
+      if (param == "buildingId" && Number.isInteger(value)){
+        // a building id is given in the url. We filter the table and change the dropdown menu.
+        $('#inlineBuildingSelector').attr('disabled', false);
+        $('#filterToggle').attr('checked', true);
+        document.getElementById("inlineBuildingSelector").value=value;
+      }
+      fillTable(document.getElementById("inlineBuildingSelector").value);
+    }, 100);
   });
 });
-
-// create and fill the room vue for the table.
-var roomsVue = createRoomsVue("roomsVue", url_api);
-fillTableWithAllRooms();
-
 
 // setup the filter on the building id
 $('#inlineBuildingSelector').change(function() {
   $(".roomLine").hide();
+  window.location.href.split("?")[0]; // remove parameters if any
   fillTable(document.getElementById("inlineBuildingSelector").value);
 });
 

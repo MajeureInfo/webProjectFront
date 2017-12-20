@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
   integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/loading.css">
 
 </head>
 <body>
@@ -84,28 +85,37 @@
         </thead>
         <tbody>
           <tr class="roomLine" v-for="room in rooms">
-            <th class="roomId">{{ room.id }}</th>
-            <th class="buildingId">{{ room.buildingId }}</th>
+            <td class="roomId">{{ room.id }}</td>
+            <td class="buildingId">{{ room.buildingId }}</td>
             <td><div v-if="room.light.status == 'ON'"><img src="img/light-on.png"></div>
               <div v-else-if="room.light.status == 'OFF'"><img src="img/light-off.png"></div>
             </td>
             <td>{{ room.light.level }}</td>
             <td><div v-if="room.noise.status == 'ON'"><img src="img/ringer-on.png"></div>
               <div v-else-if="room.noise.status == 'OFF'"><img src="img/ringer-off.png"></div>
-              <td>{{ room.noise.level }}</td>
-              <td><button @click="switchLight(room)" class="btn btn-light">
-                <img src="img/switch.png" width="20" /></button></td>
-                <td><button @click="switchRinger(room)" class="btn btn-light"><img src="img/switch.png" width="20" /></button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+            </td>
+            <td>{{ room.noise.level }}</td>
+            <td><button @click="switchLight(room)" class="btn btn-light"><img src="img/switch.png" width="20" /></button></td>
+            <td><button @click="switchRinger(room)" class="btn btn-light"><img src="img/switch.png" width="20" /></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <script src="https://unpkg.com/vue"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="js/mqtt.min.js.download"></script>
-        <script src="js/roomVue.js"></script>
-        <script src="js/rooms.js"></script>
-      </body>
-      </html>
+    <!-- Loading (temporary) -->
+    <div class="loading">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+  </div>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/mqtt.min.js.download"></script>
+  <script src="js/roomVue.js"></script>
+  <script src="js/rooms.js"></script>
+</body>
+</html>

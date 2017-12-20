@@ -1,23 +1,31 @@
 // const url_api = "http://localhost:8080/api"
 const url_api = "https://pure-island-76277.herokuapp.com/api"
 
-function fillTableWithBuildings() {
+var buildingVue = new Vue({
+  el: "#buildingVue",
+  data: {
+    buildings: [],
+  },
+  methods: {
+    goToDetails: function (event) {
+      // redirect the user to the room page and set the building filter for the chosen one
+      buildingId = parseInt(event.target.parentNode.parentNode.childNodes[0].textContent);
+      root_url = window.location.href.slice(0, window.location.href.length-15);
+      document.location.href=(root_url + "/rooms.html?buildingId=" + buildingId);
+    }
+  }
+});
+
+$(function () {
+  // fill the building table with all the available data
   axios.get(url_api + "/buildings")
   .then(function(response) {
     buildingVue.buildings=response.data;
   })
   .then(function() {
+    $(".loading").hide();
     $(".buildingLine").each(function(index) {
       $(this).delay(100*index).fadeIn();
     });
   });
-}
-
-var buildingVue = new Vue({
-  el: "#buildingVue",
-  data: {
-    buildings: [],
-  }
 });
-
-fillTableWithBuildings();
