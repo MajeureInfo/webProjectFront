@@ -9,7 +9,12 @@ var buildingVue = new Vue({
   methods: {
     goToDetails: function (event) {
       // redirect the user to the room page and set the building filter for the chosen one
-      buildingId = parseInt(event.target.parentNode.parentNode.childNodes[0].textContent);
+      target = event.target;
+      if (target.nodeName == "IMG") {
+        // fix issue with Chrome browser
+        target = target.parentNode
+      }
+      buildingId = parseInt(target.parentNode.parentNode.childNodes[0].textContent);
       root_url = window.location.href.slice(0, window.location.href.length-15);
       document.location.href=(root_url + "/rooms.html?buildingId=" + buildingId);
     }
