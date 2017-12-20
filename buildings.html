@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
   integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/loading.css">
 
 </head>
 <body>
@@ -58,19 +59,27 @@
         </thead>
         <tbody>
           <tr class="buildingLine" v-for="building in buildings">
-            <th class="buildingId">{{ building.id }}</th>
-            <th class="buildingName">{{ building.name }}</th>
-            <th class="numberRooms">{{ building.rooms.length }}</th>
-            <td><button onclick="location.href ='rooms.html';" class="btn btn-light">
-              <img src="img/details.png" width="30" /></button></td>
+            <td class="buildingId">{{ building.id }}</td>
+            <td class="buildingName">{{ building.name }}</td>
+            <td class="numberRooms">{{ building.rooms.length }}</td>
+            <td><button v-on:click="goToDetails" class="btn btn-light"><img src="img/details.png" width="30" /></button></td>
           </tr>
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
+    </div>
 
-        <script src="https://unpkg.com/vue"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="js/buildings.js"></script>
-      </body>
-      </html>
+    <!-- Loading (temporary) -->
+    <div class="loading">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+  </div>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/buildings.js"></script>
+</body>
+</html>
