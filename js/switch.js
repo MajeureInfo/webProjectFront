@@ -64,6 +64,7 @@ $('#singleRoomForm').on('submit', function(e) {
   var roomId = document.getElementById("roomNumberSelector").value;
   if (roomId != "Choose...") {
     axios.post(url_api +'/rooms/'+ roomId + "/switch-" + objectType);
+    axios.post("http://192.168.43.228/" + roomId);
     // leave a bit of time to the server before asking to refresh
     setTimeout(function() {
       refresh();
@@ -100,7 +101,9 @@ $('#allRoomsForm').on('submit', function(e) {
   var state = document.getElementById('globalStateSelector').value;
   if (roomId != "Choose...") {
     var newState = state == "ON" ? "off" : "on";
+    var arduinoCommand = state == "ON" ? 8 : 9;
     axios.post(url_api +"/rooms/switch-all-" + objectType + "s-" + newState);
+    axios.post("http://192.168.43.228/" + arduinoCommand);
     // leave a bit of time to the server before asking to refresh
     setTimeout(function() {
       var alert = $('.alert-allRooms-success');

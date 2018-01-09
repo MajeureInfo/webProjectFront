@@ -24,6 +24,7 @@ function createRoomsVue(id, url_api) {
             fillTable(document.getElementById("inlineBuildingSelector").value);
           }
         });
+        axios.post("http://192.168.43.228/" + room.id);
       },
       switchRinger(room) {
         //Send MQTT message to switch the ringer
