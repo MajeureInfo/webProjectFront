@@ -1,4 +1,5 @@
-var publisher = mqtt.connect("wss://publisher:publisher@m14.cloudmqtt.com:34219")
+// setup the mqtt client
+var roomPublisher = mqtt.connect("wss://roomPublisher:roomPublisher@m23.cloudmqtt.com:34160")
 
 function createRoomsVue(id, url_api) {
   // create a vue to contain all the rooms
@@ -12,7 +13,7 @@ function createRoomsVue(id, url_api) {
       switchLight(room) {
         //Send MQTT message to switch the light
         console.log("Switch Light " + room.id);
-        publisher.publish( "room" + room.id + "/light", "switch");
+        roomPublisher.publish( "rooms/" + room.id + "/light", "switch,webClient");
 
         axios.post(url_api +'/rooms/'+ room.id + "/switch-light")
         .then(function(response) {
@@ -22,12 +23,12 @@ function createRoomsVue(id, url_api) {
           else {
             fillTable(document.getElementById("inlineBuildingSelector").value);
           }
-        })
+        });
       },
       switchRinger(room) {
         //Send MQTT message to switch the ringer
         console.log("Switch Ringer " + room.id);
-        publisher.publish( "room" + room.id + "/ringer", "switch");
+        roomPublisher.publish( "rooms/" + room.id + "/ringer", "switch,webClient");
 
         axios.post(url_api +'/rooms/'+ room.id + "/switch-ringer")
         .then(function(response) {
@@ -37,7 +38,7 @@ function createRoomsVue(id, url_api) {
           else {
             fillTable(document.getElementById("inlineBuildingSelector").value);
           }
-        })
+        });
       }
     }
   });
