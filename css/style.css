@@ -4,19 +4,21 @@ h1 {
 
 body {
   padding-top: 20px;
+  background-color: transparent;
+  /* background-color: grey; */
+  /* background-image: linear-gradient(to top, #b3b3b3 0%,#f1f1f1 100%); */
 }
 
-.footer {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin-top: 40px;
-  border-top: 1px solid #eee;
+html {
+  min-height: 101%; /* This is to always have a scrollbar and avoid jumps when it appears */
+  background-color: rgb(250, 250, 250);
 }
 
 /* Main title */
 .jumbotron {
   text-align: center;
   background-color: transparent;
+  padding: 20px;
 }
 .jumbotron .btn {
   padding: 14px 24px;
@@ -77,14 +79,19 @@ body {
 }
 
 /* Table */
-.roomLine {
+.table {
+  border-radius: 8px;
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.3), 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 100px;
+}
+
+.roomLine{
   display: none;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.3), 0 5px 10px 0 rgba(0, 0, 0, 0.1); */
 }
 
 .buildingLine {
   display: none;
-}
-
-th {
-  width: 100px;
+  border-radius: 8px;
 }

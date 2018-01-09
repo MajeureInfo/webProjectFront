@@ -9,8 +9,8 @@ function fillTableWithAllRooms() {
   })
   .then(function() {
     $(".loading").hide();
-    $(".roomLine").each(function(index) {
-      $(this).delay(100*index).fadeIn();
+    $(".roomLine").each(function() {
+      $(this).fadeIn();
     });
   });
 }
@@ -23,8 +23,8 @@ function fillTableWithFilter(buildingId) {
   })
   .then(function() {
     $(".loading").hide();
-    $(".roomLine").each(function(index) {
-      $(this).delay(100*index).fadeIn();
+    $(".roomLine").each(function() {
+      $(this).fadeIn();
     });
   });
 }
@@ -49,7 +49,7 @@ var buildingVue = new Vue({
 // create the room vue for the table.
 var roomsVue = createRoomsVue("roomsVue", url_api);
 
-// fill the dropdown menu and the room table 
+// fill the dropdown menu and the room table
 $(function () {
   axios.get(url_api + "/buildings")
   .then(function(response) {
@@ -94,3 +94,49 @@ $('#filterToggle').click(function() {
     fillTableWithAllRooms();
   }
 });
+
+// setup the mqtt client
+var roomSubscriber = mqtt.connect("wss://roomSubscriber:roomSubscriber@m23.cloudmqtt.com:34160")
+
+roomSubscriber.on('connect', function () {
+  roomSubscriber.subscribe('rooms/#')
+})
+
+roomSubscriber.on('message', function (topic, message) {
+  // change the picture of a light or ringer when receiving a mqtt message
+  topic = topic.toString();
+  if (!message.toString().includes(',')) {
+    console.log("Bad message received.")
+    return;
+  }
+  var sender = message.toString().split(',')[1];
+  message = message.toString().split(',')[0];
+  console.log("[mqtt] " + topic + " : " + message + " from " + sender)
+  var type = topic.split('/')[2];
+  var roomId = parseInt(topic.split('/')[1]);
+
+  if (message == "switch" && sender == "arduinoClient" && Number.isInteger(roomId)) {
+    // valid mqtt message received
+    $(".roomLine").each(function (index, element){
+      if (parseInt(element.childNodes[0].textContent) == roomId) {
+        // element is the row of the table for the corresponding room
+        if (type == "light"){
+          if (element.childNodes[4].innerHTML == "<div><img src=\"img/light-on.png\"></div>") {
+            element.childNodes[4].innerHTML = "<div><img src=\"img/light-off.png\"></div>";
+          }
+          else {
+            element.childNodes[4].innerHTML = "<div><img src=\"img/light-on.png\"></div>";
+          }
+        }
+        else if (type == "ringer"){
+          if (element.childNodes[8].innerHTML == "<div><img src=\"img/ringer-on.png\"></div>") {
+            element.childNodes[8].innerHTML = "<div><img src=\"img/ringer-off.png\"></div>";
+          }
+          else {
+            element.childNodes[8].innerHTML = "<div><img src=\"img/ringer-on.png\"></div>";
+          }
+        }
+      }
+    });
+  }
+})
