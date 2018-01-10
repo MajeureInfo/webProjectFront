@@ -29,8 +29,8 @@ $(function () {
   })
   .then(function() {
     $(".loading").hide();
-    $(".buildingLine").each(function(index) {
-      $(this).delay(100*index).fadeIn();
+    $(".buildingLine").each(function() {
+      $(this).fadeIn();
     });
   });
 });
