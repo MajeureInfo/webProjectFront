@@ -14,7 +14,7 @@ function createRoomsVue(id, url_api) {
         //Send MQTT message to switch the light
         console.log("Switch Light " + room.id);
         roomPublisher.publish( "rooms/" + room.id + "/light", "switch,webClient");
-
+        axios.post("http://192.168.43.228/" + room.id);
         axios.post(url_api +'/rooms/'+ room.id + "/switch-light")
         .then(function(response) {
           if ($("#inlineBuildingSelector").attr('disabled') == "disabled") {
@@ -24,12 +24,13 @@ function createRoomsVue(id, url_api) {
             fillTable(document.getElementById("inlineBuildingSelector").value);
           }
         });
+        axios.post("http://192.168.43.228/" + room.id);
       },
       switchRinger(room) {
         //Send MQTT message to switch the ringer
         console.log("Switch Ringer " + room.id);
         roomPublisher.publish( "rooms/" + room.id + "/ringer", "switch,webClient");
-
+        axios.post("http://192.168.43.228/" + room.id);
         axios.post(url_api +'/rooms/'+ room.id + "/switch-ringer")
         .then(function(response) {
           if ($("#inlineBuildingSelector").attr('disabled') == "disabled") {

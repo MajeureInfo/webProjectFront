@@ -115,28 +115,39 @@ roomSubscriber.on('message', function (topic, message) {
   var type = topic.split('/')[2];
   var roomId = parseInt(topic.split('/')[1]);
 
-  if (message == "switch" && sender == "arduinoClient" && Number.isInteger(roomId)) {
+  if (message == "switch" && (sender == "appClient" || sender == "arduinoClient") && Number.isInteger(roomId)) {
     // valid mqtt message received
     $(".roomLine").each(function (index, element){
       if (parseInt(element.childNodes[0].textContent) == roomId) {
         // element is the row of the table for the corresponding room
-        if (type == "light"){
-          if (element.childNodes[4].innerHTML == "<div><img src=\"img/light-on.png\"></div>") {
-            element.childNodes[4].innerHTML = "<div><img src=\"img/light-off.png\"></div>";
-          }
-          else {
-            element.childNodes[4].innerHTML = "<div><img src=\"img/light-on.png\"></div>";
-          }
-        }
-        else if (type == "ringer"){
-          if (element.childNodes[8].innerHTML == "<div><img src=\"img/ringer-on.png\"></div>") {
-            element.childNodes[8].innerHTML = "<div><img src=\"img/ringer-off.png\"></div>";
-          }
-          else {
-            element.childNodes[8].innerHTML = "<div><img src=\"img/ringer-on.png\"></div>";
-          }
-        }
+        switchPicture(element, type);
       }
     });
   }
+  else if (roomId == "all"){
+    $(".roomLine").each(function (index, element){
+        // element is the row of the table for the corresponding room
+        switchPicture(element, type);
+    });
+  }
 })
+
+function switchPicture(element, type) {
+  // update the picture of an element
+  if (type == "light"){
+    if (element.childNodes[4].innerHTML == "<div><img src=\"img/light-on.png\"></div>") {
+      element.childNodes[4].innerHTML = "<div><img src=\"img/light-off.png\"></div>";
+    }
+    else {
+      element.childNodes[4].innerHTML = "<div><img src=\"img/light-on.png\"></div>";
+    }
+  }
+  else if (type == "ringer"){
+    if (element.childNodes[8].innerHTML == "<div><img src=\"img/ringer-on.png\"></div>") {
+      element.childNodes[8].innerHTML = "<div><img src=\"img/ringer-off.png\"></div>";
+    }
+    else {
+      element.childNodes[8].innerHTML = "<div><img src=\"img/ringer-on.png\"></div>";
+    }
+  }
+}

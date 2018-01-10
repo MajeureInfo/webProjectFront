@@ -95,8 +95,8 @@
               <div v-else-if="room.noise.status == 'OFF'"><img src="img/ringer-off.png"></div>
             </td>
             <td>{{ room.noise.level }}</td>
-            <td><button @click="switchLight(room)" class="btn btn-light"><img src="img/switch.png" width="20" /></button></td>
-            <td><button @click="switchRinger(room)" class="btn btn-light"><img src="img/switch.png" width="20" /></button></td>
+            <td><button @click="switchLight(room)" class="btn btn-light"><img class="switchLightImg" src="img/switch.png" width="20" /></button></td>
+            <td><button @click="switchRinger(room)" class="btn btn-light"><img class="switchRingerImg" src="img/switch.png" width="20" /></button></td>
           </tr>
         </tbody>
       </table>

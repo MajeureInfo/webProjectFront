@@ -1,6 +1,9 @@
 const url_api = "https://pure-island-76277.herokuapp.com/api"
 //const url_api = "http://localhost:8080/api"
 
+// setup the mqtt client
+var roomPublisher = mqtt.connect("wss://roomPublisher:roomPublisher@m23.cloudmqtt.com:34160");
+
 const objectType = $('h1').attr('class');
 
 // create the vue for the dropdown menu in the formular.
@@ -63,7 +66,9 @@ $('#singleRoomForm').on('submit', function(e) {
   e.preventDefault();
   var roomId = document.getElementById("roomNumberSelector").value;
   if (roomId != "Choose...") {
+    roomPublisher.publish( "rooms/" + roomId + "/" + objectType, "switch,webClient");
     axios.post(url_api +'/rooms/'+ roomId + "/switch-" + objectType);
+    axios.post("http://192.168.43.228/" + roomId);
     // leave a bit of time to the server before asking to refresh
     setTimeout(function() {
       refresh();
@@ -96,19 +101,19 @@ $('#globalStateSelector').change(function() {
 $('#allRoomsForm').on('submit', function(e) {
   // turn the light off when submitting the formular.
   e.preventDefault();
-  var roomId = document.getElementById("roomNumberSelector").value;
   var state = document.getElementById('globalStateSelector').value;
-  if (roomId != "Choose...") {
-    var newState = state == "ON" ? "off" : "on";
-    axios.post(url_api +"/rooms/switch-all-" + objectType + "s-" + newState);
-    // leave a bit of time to the server before asking to refresh
-    setTimeout(function() {
-      var alert = $('.alert-allRooms-success');
-      alert.text("All the " + objectType + "s have been successfully turned " + newState + " !");
-      alert.fadeIn();
-      setTimeout(function () {
-        alert.fadeOut();
-      }, 2000);
-    }, 500);
-  }
+  var newState = state == "ON" ? "off" : "on";
+  var arduinoCommand = state == "ON" ? 8 : 9;
+  roomPublisher.publish("rooms/all/" + objectType, "switch-" + newState + ",webClient");
+  axios.post(url_api +"/rooms/switch-all-" + objectType + "s-" + newState);
+  axios.post("http://192.168.43.228/" + arduinoCommand);
+  // leave a bit of time to the server before asking to refresh
+  setTimeout(function() {
+    var alert = $('.alert-allRooms-success');
+    alert.text("All the " + objectType + "s have been successfully turned " + newState + " !");
+    alert.fadeIn();
+    setTimeout(function () {
+      alert.fadeOut();
+    }, 2000);
+  }, 500);
 });
