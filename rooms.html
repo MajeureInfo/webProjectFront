@@ -20,7 +20,7 @@
       <nav class="navbar navbar-expand-md navbar-light bg-light rounded mb-3">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button> 
+        </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav text-md-center nav-justified w-100">
             <li class="nav-item">
@@ -95,8 +95,8 @@
               <div v-else-if="room.noise.status == 'OFF'"><img src="img/ringer-off.png"></div>
             </td>
             <td>{{ room.noise.level }}</td>
-            <td><button @click="switchLight(room)" class="btn btn-light"><img src="img/switch.png" width="20" /></button></td>
-            <td><button @click="switchRinger(room)" class="btn btn-light"><img src="img/switch.png" width="20" /></button></td>
+            <td><button @click="switchLight(room)" class="btn btn-light"><img class="switchLightImg" src="img/switch.png" width="20" /></button></td>
+            <td><button @click="switchRinger(room)" class="btn btn-light"><img class="switchRingerImg" src="img/switch.png" width="20" /></button></td>
           </tr>
         </tbody>
       </table>
